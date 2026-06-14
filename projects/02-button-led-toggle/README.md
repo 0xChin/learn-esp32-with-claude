@@ -125,6 +125,27 @@ los pines no llegan a la protoboard.
 Esto es tan silencioso que incluso un test directo pin-a-pin (puentear un GPIO a GND con un
 jumper) falla sin dar señales: si los pines no entran, el jumper tampoco llega a nada.
 
+### Los rieles de alimentación están partidos (¡4 segmentos!)
+
+Otra falla muda y traicionera. En una protoboard MB-102, las líneas de alimentación `+` y `−`
+de los bordes **no son una tira continua**: son **4 segmentos independientes**. Cada riel
+viene cortado al medio (mitad izquierda / mitad derecha), y además el riel de arriba está
+separado del de abajo. O sea: `−` arriba-izquierda, `−` arriba-derecha, `−` abajo-izquierda y
+`−` abajo-derecha son **cuatro buses distintos** que no se hablan entre sí.
+
+Consecuencia: si metés GND en un segmento, **no llega a los otros**. Un componente cableado a
+un segmento que quedó sin GND simplemente no hace nada — y, de nuevo, **sin ningún error**: el
+código corre, pero ese pedazo del circuito flota.
+
+> **Ritual al armar la protoboard:** apenas la montás, **puenteá todos los segmentos de riel**
+> con jumpers. Uní las dos mitades del `−` (izquierda con derecha) y conectá el `−` de arriba
+> con el `−` de abajo; hacé lo mismo con el `+` si lo usás. Así te queda **un único bus
+> continuo** de GND (y de 3.3V) en toda la placa y dejás de adivinar a qué segmento llega cada
+> cable.
+
+Este fue, de hecho, el último bug real de una sesión de depuración: todo estaba bien cableado,
+pero el GND se había alimentado a un segmento que no era el que usaba el botón.
+
 ### Sketch de diagnóstico: ver el GPIO en vivo
 
 Antes de pelearte con el debounce o el toggle, comprobá que el GPIO **realmente** llega a GND.
