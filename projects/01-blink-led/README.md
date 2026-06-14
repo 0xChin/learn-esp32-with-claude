@@ -84,5 +84,5 @@ el LED cuando corresponde. Es la base de las **máquinas de estados** que vas a 
 
 ## Siguiente
 
-➡️ **02 — Botón + LED (toggle):** agregamos un pulsador con `INPUT_PULLUP` y debounce
-para encender/apagar el LED. (Próximamente.)
+➡️ **[02 — Botón + LED (toggle)](../02-button-led-toggle/):** agregamos un pulsador con
+`INPUT_PULLUP` y debounce para encender/apagar el LED.
