@@ -1,0 +1,22 @@
+# Arduino IDE build artifacts
+build/
+*.bin
+*.elf
+*.hex
+*.map
+
+# Arduino IDE per-sketch metadata
+.theia/
+sketch.json
+
+# PlatformIO (cuando migremos)
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# macOS
+.DS_Store
+
+# Editores
+.vscode/
+*.swp
