@@ -63,7 +63,8 @@ Más detalle en [`docs/pinout-and-safe-gpios.md`](docs/pinout-and-safe-gpios.md)
 |----|----------|-----------|--------|
 | 01 | [Blink LED](projects/01-blink-led/) | GPIO salida, protoboard, resistencia limitadora, `millis()` no bloqueante, Serial | ✅ |
 | 02 | [Botón + LED (toggle)](projects/02-button-led-toggle/) | GPIO entrada, `INPUT_PULLUP`, debounce, detección de flanco | ✅ |
-| 03 | Potenciómetro (ADC + PWM) | Entrada analógica, ADC, PWM/brillo | 🔜 |
+| 03 | [Potenciómetro (ADC + PWM)](projects/03-potentiometer-pwm/) | Entrada analógica, ADC, PWM/brillo, `map()` | 🚧 |
+| 04 | Sensor analógico (LM35 / LDR) | ADC aplicado a un sensor real | 🔜 |
 
 ## Estructura del repo
 
