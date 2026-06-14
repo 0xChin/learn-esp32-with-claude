@@ -106,6 +106,54 @@ vas a repetir mucho.
    (nivel, no flanco). ¿Qué parte del código sobra para eso?
 3. Agregá un segundo botón en otro GPIO que controle un segundo LED, sin usar `delay()`.
 
+## Troubleshooting
+
+Si nada funciona y no ves ningún error, respirá: casi siempre es algo físico, no el código.
+
+### El bug #1 del principiante: la placa no está bien encajada
+
+En una protoboard MB-102 estándar, un ESP32 de 38 pines (NodeMCU ESP-32S) entra **muy
+justo**. Es facilísimo apoyarla y creer que quedó puesta cuando en realidad las patas
+quedaron **descansando sobre los huecos**, sin entrar. Sin contacto eléctrico, todo "flota":
+ni el botón ni el LED responden, y **no aparece ningún error** — el código corre igual, pero
+los pines no llegan a la protoboard.
+
+> **Regla de oro: si la placa sale sin esfuerzo, no está bien puesta.** Una placa bien
+> encajada **cuesta** sacarla — tenés que hacer fuerza pareja. Empujala firme hasta que sentís
+> que los pines entran, mirando que el cuerpo quede paralelo a la protoboard.
+
+Esto es tan silencioso que incluso un test directo pin-a-pin (puentear un GPIO a GND con un
+jumper) falla sin dar señales: si los pines no entran, el jumper tampoco llega a nada.
+
+### Sketch de diagnóstico: ver el GPIO en vivo
+
+Antes de pelearte con el debounce o el toggle, comprobá que el GPIO **realmente** llega a GND.
+Subí este sketch mínimo y mirá el Serial Monitor (115200): imprime `digitalRead(BUTTON)` todo
+el tiempo. Con `INPUT_PULLUP`, **1 = suelto** y **0 = conectado a GND**. Si puenteás el GPIO a
+GND con un jumper y el número **no** baja a 0, el contacto no existe (placa mal encajada,
+columna equivocada o jumper flojo).
+
+```cpp
+#define BUTTON 13
+void setup() {
+  Serial.begin(115200);
+  pinMode(BUTTON, INPUT_PULLUP);
+}
+void loop() {
+  Serial.println(digitalRead(BUTTON));  // 1 = suelto, 0 = a GND
+  delay(100);
+}
+```
+
+### Otras fallas comunes
+
+- **LED al revés:** no enciende y no se daña. Solo dalo vuelta (pata larga = ánodo +).
+- **Botón mal montado:** tiene que ir **a caballo sobre el canal central**. Si está girado 90°
+  (las dos patas que usás del mismo lado) queda como siempre apretado. Y ojo con la columna:
+  **errarle por una columna** deja la pata sin conexión aunque parezca alineada.
+- **Baud equivocado:** el Serial Monitor tiene que estar en **115200**, si no ves caracteres
+  basura o nada.
+
 ## Siguiente
 
 ➡️ **03 — (próximamente):** entrada analógica con el potenciómetro (ADC) para variar la
