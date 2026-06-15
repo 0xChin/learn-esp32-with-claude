@@ -64,7 +64,9 @@ Más detalle en [`docs/pinout-and-safe-gpios.md`](docs/pinout-and-safe-gpios.md)
 | 01 | [Blink LED](projects/01-blink-led/) | GPIO salida, protoboard, resistencia limitadora, `millis()` no bloqueante, Serial | ✅ |
 | 02 | [Botón + LED (toggle)](projects/02-button-led-toggle/) | GPIO entrada, `INPUT_PULLUP`, debounce, detección de flanco | ✅ |
 | 03 | [Potenciómetro (ADC + PWM)](projects/03-potentiometer-pwm/) | Entrada analógica, ADC, PWM/brillo, `map()` | 🚧 |
-| 04 | Sensor analógico (LM35 / LDR) | ADC aplicado a un sensor real | 🔜 |
+| 04 | [Buzzer pasivo (melodía)](projects/04-buzzer-melody/) | Salida de sonido, frecuencia = tono, `tone()` | 🚧 |
+| 05 | [Jukebox: 2 canciones + 2 botones](projects/05-jukebox-buttons/) | Funciones, varias entradas, silencios | 🚧 |
+| 06 | Servo SG90 | PWM aplicado a posición/ángulo | 🔜 |
 
 ## Estructura del repo
 
